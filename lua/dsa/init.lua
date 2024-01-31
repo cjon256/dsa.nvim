@@ -103,5 +103,39 @@ return {
             end,
             { nargs = 0 }
         )
+
+        vim.api.nvim_create_user_command(
+            'LeetSubmit',
+            function()
+                local most_recent_id = require("dsa").most_recent_id
+                if most_recent_id == 0 then
+                    print("No most recent id found")
+                    return
+                end
+                local leet_exe
+                if vim.bo.filetype == "python" then
+                    leet_exe = "pyleet"
+                elseif vim.bo.filetype == "go" then
+                    leet_exe = "goleet"
+                elseif vim.bo.filetype == "rust" then
+                    leet_exe = "rsleet"
+                else
+                    print("Unsupported filetype")
+                    return
+                end
+                local handler = io.popen(leet_exe .. " submit " .. most_recent_id)
+                if handler == nil then
+                    print("handler is nil")
+                    return
+                end
+                local info = handler:read("*a")
+                if info == "" then
+                    print("No information found")
+                else
+                    vim.print(info)
+                end
+            end,
+            { nargs = 0 }
+        )
     end,
 }
