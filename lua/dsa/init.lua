@@ -27,7 +27,7 @@ return {
         vim.api.nvim_create_user_command(
             'LeetPyPrompt',
             function()
-                local handler = vim.fn.input("Enter the problem id: ")
+                local id = vim.fn.input("Enter the problem id: ")
                 local handler = io.popen("pyleet info " .. id.args)
                 if handler == nil then
                     print("handler is nil")
@@ -44,7 +44,7 @@ return {
                     vim.cmd("e " .. file)
                 end
             end,
-            { nargs = 1 }
+            { nargs = 0 }
         )
 
         vim.api.nvim_create_user_command(
