@@ -81,7 +81,7 @@ return {
                     if info == "" then
                         print("No information found")
                     else
-                        vim.print(vim.inspect(info))
+                        vim.print(info)
                     end
                 elseif vim.bo.filetype == "go" then
                     local handler = io.popen("goleet test " .. most_recent_id)
