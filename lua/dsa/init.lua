@@ -14,7 +14,7 @@ return {
                 if info == "" then
                     vim.print("No information found")
                 else
-                    require("dsa.nvim").most_recent_id = id.args
+                    require("dsa").most_recent_id = id.args
                     local dir = string.match(info, "dir: ([^\n]+)\n")
                     local file = string.match(info, "file: (.+)\n")
                     vim.fn.chdir(dir)
@@ -70,7 +70,7 @@ return {
         vim.api.nvim_create_user_command(
             'LeetTest',
             function()
-                local most_recent_id = require("dsa.nvim").most_recent_id
+                local most_recent_id = require("dsa").most_recent_id
                 if vim.bo.filetype == "python" then
                     local handler = io.popen("pyleet test " .. most_recent_id)
                     if handler == nil then
