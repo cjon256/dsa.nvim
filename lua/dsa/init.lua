@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 return {
     setup = function()
         vim.api.nvim_create_user_command(
@@ -10,9 +11,8 @@ return {
                 end
                 local info = handler:read("*a")
                 if info == "" then
-                    info = "No information found"
+                    vim.print("No information found")
                 else
-                    vim.print(vim.inspect(info))
                     local dir = string.match(info, "dir: ([^\n]+)\n")
                     local file = string.match(info, "file: (.+)\n")
                     vim.fn.chdir(dir)
@@ -32,9 +32,8 @@ return {
                 end
                 local info = handler:read("*a")
                 if info == "" then
-                    info = "No information found"
+                    vim.print("No information found")
                 else
-                    vim.print(vim.inspect(info))
                     local dir = string.match(info, "dir: ([^\n]+)\n")
                     local file = string.match(info, "file: (.+)\n")
                     vim.fn.chdir(dir)
@@ -54,7 +53,7 @@ return {
                 end
                 local info = handler:read("*a")
                 if info == "" then
-                    info = "No information found"
+                    print("No information found")
                 else
                     vim.print(vim.inspect(info))
                     local dir = string.match(info, "dir: ([^\n]+)\n")
