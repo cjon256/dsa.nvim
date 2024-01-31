@@ -25,6 +25,29 @@ return {
         )
 
         vim.api.nvim_create_user_command(
+            'LeetPyPrompt',
+            function()
+                local handler = vim.fn.input("Enter the problem id: ")
+                local handler = io.popen("pyleet info " .. id.args)
+                if handler == nil then
+                    print("handler is nil")
+                    return
+                end
+                local info = handler:read("*a")
+                if info == "" then
+                    vim.print("No information found")
+                else
+                    require("dsa").most_recent_id = id.args
+                    local dir = string.match(info, "dir: ([^\n]+)\n")
+                    local file = string.match(info, "file: (.+)\n")
+                    vim.fn.chdir(dir)
+                    vim.cmd("e " .. file)
+                end
+            end,
+            { nargs = 1 }
+        )
+
+        vim.api.nvim_create_user_command(
             'LeetGo',
             function(id)
                 local handler = io.popen("goleet info " .. id.args)
