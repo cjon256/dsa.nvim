@@ -6,7 +6,7 @@ return {
             'LeetPy',
             function()
                 local id = vim.fn.input("pyleet: enter the problem id: ")
-                local handler = io.popen("pyleet info " .. id.args)
+                local handler = io.popen("pyleet info " .. id)
                 if handler == nil then
                     print("handler is nil")
                     return
@@ -15,7 +15,7 @@ return {
                 if info == "" then
                     vim.print("No information found")
                 else
-                    require("dsa").most_recent_id = id.args
+                    require("dsa").most_recent_id = id
                     local dir = string.match(info, "dir: ([^\n]+)\n")
                     local file = string.match(info, "file: (.+)\n")
                     vim.fn.chdir(dir)
@@ -29,7 +29,7 @@ return {
             'LeetGo',
             function()
                 local id = vim.fn.input("goleet: enter the problem id: ")
-                local handler = io.popen("goleet info " .. id.args)
+                local handler = io.popen("goleet info " .. id)
                 if handler == nil then
                     print("handler is nil")
                     return
@@ -51,7 +51,7 @@ return {
             'LeetRust',
             function()
                 local id = vim.fn.input("rsleet: enter the problem id: ")
-                local handler = io.popen("rsleet info " .. id.args)
+                local handler = io.popen("rsleet info " .. id)
                 if handler == nil then
                     print("handler is nil")
                     return
