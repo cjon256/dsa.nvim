@@ -187,11 +187,7 @@ return {
                     print("No most recent id found")
                     return
                 end
-                local handler = io.popen("leetopen" .. most_recent_id)
-                if handler == nil then
-                    print("leetopen failed")
-                    return
-                end
+                vim.cmd("leetopen " .. most_recent_id)
             end,
             { nargs = 0 }
         )
@@ -209,7 +205,8 @@ return {
                     print("No information found")
                     return
                 end
-                print("id: " .. id)
+                notification = "Next problem: " .. id
+                vim.notify(notification, "info")
 
                 -- check if the current filetype is python, go, or rust
                 local filetype = vim.bo.filetype
