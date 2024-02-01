@@ -180,6 +180,23 @@ return {
         )
 
         vim.api.nvim_create_user_command(
+            'LeetOpen',
+            function()
+                local most_recent_id = require("dsa").most_recent_id
+                if most_recent_id == 0 then
+                    print("No most recent id found")
+                    return
+                end
+                local handler = io.popen("leetopen" .. most_recent_id)
+                if handler == nil then
+                    print("leetopen failed")
+                    return
+                end
+            end,
+            { nargs = 0 }
+        )
+
+        vim.api.nvim_create_user_command(
             'LeetNext',
             function()
                 local handler = io.popen("grind75 next")
