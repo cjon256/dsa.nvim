@@ -187,7 +187,7 @@ return {
                     print("No most recent id found")
                     return
                 end
-                vim.cmd("leetopen " .. most_recent_id)
+                vim.cmd("!leetopen " .. most_recent_id)
             end,
             { nargs = 0 }
         )
