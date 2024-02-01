@@ -180,7 +180,7 @@ return {
         )
 
         vim.api.nvim_create_user_command(
-            'LeetNew',
+            'LeetNext',
             function()
                 local handler = io.popen("grind75 next")
                 if handler == nil then
@@ -194,32 +194,25 @@ return {
                 end
                 print("id: " .. id)
 
-                -- if most_recent_id == 0 then
-                --     print("No most recent id found")
-                --     return
-                -- end
-                -- local leet_exe
-                -- if vim.bo.filetype == "python" then
-                --     leet_exe = "pyleet"
-                -- elseif vim.bo.filetype == "go" then
-                --     leet_exe = "goleet"
-                -- elseif vim.bo.filetype == "rust" then
-                --     leet_exe = "rsleet"
-                -- else
-                --     print("Unsupported filetype")
-                --     return
-                -- end
-                -- local handler = io.popen(leet_exe .. " submit " .. most_recent_id)
-                -- if handler == nil then
-                --     print("handler is nil")
-                --     return
-                -- end
-                -- local info = handler:read("*a")
-                -- if info == "" then
-                --     print("No information found")
-                -- else
-                --     vim.print(info)
-                -- end
+                -- check if the current filetype is python, go, or rust
+                local filetype = vim.bo.filetype
+                local supported_types = { "python", "go", "rust" }
+                if not vim.tbl_contains(supported_types, filetype) then
+                    filetype = vim.fn.input("Enter the filetype: ")
+                end
+
+                local leet_exe
+                if filetype == "python" then
+                    leet_exe = "LeetPy"
+                elseif filetype == "go" then
+                    leet_exe = "LeetGo"
+                elseif filetype == "rust" then
+                    leet_exe = "LeetRust"
+                else
+                    print("Unsupported filetype")
+                    return
+                end
+                vim.cmd(leet_exe .. " " .. id)
             end,
             { nargs = 0 }
         )
