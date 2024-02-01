@@ -187,7 +187,7 @@ return {
                     print("No most recent id found")
                     return
                 end
-                vim.cmd("!leetopen " .. most_recent_id)
+                vim.cmd('silent exec "!leetopen ' .. most_recent_id .. '"')
             end,
             { nargs = 0 }
         )
@@ -205,8 +205,8 @@ return {
                     print("No information found")
                     return
                 end
-                notification = "Next problem: " .. id
-                vim.notify(notification, "info")
+                local notification = "Next problem: " .. id
+                vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
 
                 -- check if the current filetype is python, go, or rust
                 local filetype = vim.bo.filetype
