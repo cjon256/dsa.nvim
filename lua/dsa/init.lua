@@ -205,8 +205,8 @@ return {
                     print("No information found")
                     return
                 end
-                local notification = "Next problem: " .. id
-                vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
+                -- local notification = "Next problem: " .. id
+                -- vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
 
                 -- check if the current filetype is python, go, or rust
                 local filetype = vim.bo.filetype
