@@ -198,7 +198,7 @@ return {
 
         vim.api.nvim_create_user_command(
             'LeetNext',
-            function(cmd)
+            function()
                 local handler = io.popen("grind75 next")
                 if handler == nil then
                     print("cannot call grind75")
@@ -209,11 +209,6 @@ return {
                     print("No information found")
                     return
                 end
-                if cmd.args == "open" then
-                    vim.cmd("LeetOpen " .. id)
-                end
-                -- local notification = "Next problem: " .. id
-                -- vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
 
                 -- check if the current filetype is python, go, or rust
                 local filetype = vim.bo.filetype
@@ -235,7 +230,16 @@ return {
                 end
                 vim.cmd(leet_exe .. " " .. id)
             end,
-            { nargs = 1 }
+            { nargs = 0 }
+        )
+
+        vim.api.nvim_create_user_command(
+            'LeetNextOpen',
+            function()
+                vim.cmd("LeetOpen")
+                vim.cmd("LeetNext")
+            end,
+            { nargs = 0 }
         )
     end,
 }
