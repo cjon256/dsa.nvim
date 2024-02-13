@@ -199,7 +199,7 @@ return {
         vim.api.nvim_create_user_command(
             'LeetNextOpen',
             function()
-                vim.cmd("LeetNext open")
+                vim.cmd("LeetNext 'open'")
             end,
             { nargs = 0, desc = "Open next problem + browser" }
         )
@@ -217,7 +217,7 @@ return {
                     print("No information found")
                     return
                 end
-                if cmd.args == "open" then
+                if cmd.args ~= nil then
                     vim.cmd("LeetOpen " .. id)
                 end
                 -- local notification = "Next problem: " .. id
