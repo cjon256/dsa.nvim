@@ -1,4 +1,4 @@
--- luacheck: globals vim
+== "open" then-- luacheck: globals vim
 return {
     most_recent_id = 0,
     setup = function()
@@ -218,7 +218,8 @@ return {
                     return
                 end
                 if cmd.args ~= nil then
-                    vim.cmd("LeetOpen " .. id)
+                    echo("args is " .. cmd.args)
+                    -- vim.cmd("LeetOpen " .. id)
                 end
                 -- local notification = "Next problem: " .. id
                 -- vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
