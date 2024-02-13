@@ -193,7 +193,7 @@ return {
                 end
                 vim.cmd('silent exec "!leetopen ' .. idarg .. '"')
             end,
-            { nargs = 1, desc = "Open the problem in the browser" }
+            { nargs = '?', desc = "Open the problem in the browser" }
         )
 
         vim.api.nvim_create_user_command(
