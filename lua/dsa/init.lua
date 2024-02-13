@@ -181,19 +181,15 @@ return {
 
         vim.api.nvim_create_user_command(
             'LeetOpen',
-            function(id)
-                local idarg = id.args
-                if idarg == nil then
-                    local most_recent_id = require("dsa").most_recent_id
-                    if most_recent_id == 0 then
-                        print("No most recent id found")
-                        return
-                    end
-                    idarg = most_recent_id
+            function()
+                local most_recent_id = require("dsa").most_recent_id
+                if most_recent_id == 0 then
+                    print("No most recent id found")
+                    return
                 end
-                vim.cmd('silent exec "!leetopen ' .. idarg .. '"')
+                vim.cmd('silent exec "!leetopen ' .. most_recent_id .. '"')
             end,
-            { nargs = '?', desc = "Open the problem in the browser" }
+            { nargs = 0, desc = "Open the problem in the browser" }
         )
 
         vim.api.nvim_create_user_command(
