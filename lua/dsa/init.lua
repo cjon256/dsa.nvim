@@ -181,15 +181,19 @@ return {
 
         vim.api.nvim_create_user_command(
             'LeetOpen',
-            function()
-                local most_recent_id = require("dsa").most_recent_id
-                if most_recent_id == 0 then
-                    print("No most recent id found")
-                    return
+            function(id)
+                local idarg = id.args
+                if idarg == nil then
+                    local most_recent_id = require("dsa").most_recent_id
+                    if most_recent_id == 0 then
+                        print("No most recent id found")
+                        return
+                    end
+                    idarg = most_recent_id
                 end
-                vim.cmd('silent exec "!leetopen ' .. most_recent_id .. '"')
+                vim.cmd('silent exec "!leetopen ' .. idarg .. '"')
             end,
-            { nargs = 0 }
+            { nargs = 1, desc = "Open the problem in the browser" }
         )
 
         vim.api.nvim_create_user_command(
@@ -205,6 +209,7 @@ return {
                     print("No information found")
                     return
                 end
+                vim.cmd("LeetOpen " .. id)
                 -- local notification = "Next problem: " .. id
                 -- vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
 
