@@ -197,14 +197,6 @@ return {
         )
 
         vim.api.nvim_create_user_command(
-            'LeetNextOpen',
-            function()
-                vim.cmd("LeetNext 'open'")
-            end,
-            { nargs = 0, desc = "Open next problem + browser" }
-        )
-
-        vim.api.nvim_create_user_command(
             'LeetNext',
             function(cmd)
                 local handler = io.popen("grind75 next")
@@ -218,11 +210,7 @@ return {
                     return
                 end
                 if cmd.args == "open" then
-                    vim.print("args are open: " .. cmd.args)
-                    -- vim.cmd("LeetOpen " .. id)
-                elseif cmd.args ~= nil then
-                    vim.print("args are " .. cmd.args)
-                    -- vim.cmd("LeetOpen " .. id)
+                    vim.cmd("LeetOpen " .. id)
                 end
                 -- local notification = "Next problem: " .. id
                 -- vim.notify(notification, vim.log.levels.INFO, { title = "LeetNext" })
