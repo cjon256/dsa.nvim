@@ -218,7 +218,7 @@ return {
                     return
                 end
                 if cmd.args ~= nil then
-                    echo("args are ".. cmd.args)
+                    vim.print("args are " .. cmd.args)
                     -- vim.cmd("LeetOpen " .. id)
                 end
                 -- local notification = "Next problem: " .. id
