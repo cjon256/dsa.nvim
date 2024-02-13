@@ -217,7 +217,10 @@ return {
                     print("No information found")
                     return
                 end
-                if cmd.args ~= nil then
+                if cmd.args == "open" then
+                    vim.print("args are open: " .. cmd.args)
+                    -- vim.cmd("LeetOpen " .. id)
+                elseif cmd.args ~= nil then
                     vim.print("args are " .. cmd.args)
                     -- vim.cmd("LeetOpen " .. id)
                 end
@@ -244,7 +247,7 @@ return {
                 end
                 vim.cmd(leet_exe .. " " .. id)
             end,
-            { nargs = 0 }
+            { nargs = 1 }
         )
     end,
 }
